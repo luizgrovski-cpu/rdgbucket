@@ -70,6 +70,59 @@ python app.py \
   --expressivity "fala calorosa, natural e fluida"
 ```
 
+
+## Como executar (passo a passo)
+
+1. **Criar e ativar ambiente virtual**
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+2. **Instalar dependências**
+
+```bash
+pip install -r requirements.txt
+```
+
+3. **Configurar chave da OpenAI**
+
+```bash
+export OPENAI_API_KEY="sua_chave"
+```
+
+4. **Executar no modo texto (recomendado)**
+
+```bash
+python app.py --input-mode text --text "Mensagem de teste" --no-play
+```
+
+5. **Executar no modo áudio (captura 48kHz/24-bit mono + STT + TTS)**
+
+```bash
+python app.py --input-mode audio --seconds 5 --voice alloy
+```
+
+6. **Executar modo híbrido (texto primeiro, áudio como fallback)**
+
+```bash
+python app.py --input-mode hybrid --text-file ./mensagem.txt --no-play
+```
+
+### Saídas geradas
+
+Os arquivos são salvos por padrão em `./artifacts`:
+- `input_48k_24b_mono.wav` (quando há gravação de áudio)
+- `tts_raw.wav`
+- `tts_final.wav`
+
+### Execução rápida (one-liner)
+
+```bash
+python -m venv .venv && source .venv/bin/activate && pip install -r requirements.txt && export OPENAI_API_KEY="sua_chave" && python app.py --input-mode text --text "Olá" --no-play
+```
+
 ## Requisitos técnicos atendidos
 
 1. **Taxa de amostragem**: `48000` Hz
